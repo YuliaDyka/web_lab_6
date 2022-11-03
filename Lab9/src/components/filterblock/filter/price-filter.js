@@ -5,14 +5,14 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useContext } from "react";
 import { FiltersContext } from "../../context-provider/filters-context-provider";
-import { Filters, FiltersData, priceFilters } from "./filters-common";
+import { priceFilters } from "./filters-common";
 
 export function PriceFilter() {
   const [filters, setFilters] = useContext(FiltersContext);
 
   const onChange = (event) => {
     setFilters({...filters, priceFilterId: event.target.value});
-    //setFilters(new Filters(event.target.value, filters.nameFilter));
+
   };
 
   return (

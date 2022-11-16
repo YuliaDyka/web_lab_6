@@ -6,11 +6,13 @@ export const OrdersContext = React.createContext();
 // eslint-disable-next-line import/no-anonymous-default-export
 export default ({ children }) => {
   const [ordersData, setOrdersData] = useState([]);
+  const [isDataLoading, setIsDataLoading] = useState(true);
 
   useEffect(() => {
     getAllOrders()
       .then((result) => {
         setOrdersData([...result]);
+        setIsDataLoading(false);
       })
       .catch((error) => {
         console.log("no server response ", error);
@@ -18,7 +20,7 @@ export default ({ children }) => {
       });
   }, []);
   return (
-    <OrdersContext.Provider value={[ordersData, setOrdersData]}>
+    <OrdersContext.Provider value={[ordersData, isDataLoading]}>
       {children}
     </OrdersContext.Provider>
   );

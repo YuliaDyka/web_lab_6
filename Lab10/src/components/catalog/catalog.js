@@ -8,14 +8,16 @@ import { useContext, useState, useEffect } from "react";
 import { OrdersContext } from "../context-provider/orders-context-provider";
 import { FiltersContext } from "../context-provider/filters-context-provider";
 import { priceFilters } from "../filterblock/filter/filters-common";
+import Loader from "../loading/loading";
 const img = require("../../images/car.jpg");
 
 function Catalog() {
-  const [ordersData] = useContext(OrdersContext);
+  const [ordersData, isDataLoading] = useContext(OrdersContext);
   const [filters] = useContext(FiltersContext);
   const [displayData, setDisplayData] = useState([]);
 
   useEffect(() => {
+    console.log("LOADING: " + isDataLoading);
     applyFilters();
   }, [ordersData]);
 
@@ -50,20 +52,34 @@ function Catalog() {
         <Typography variant="h5" mb="10px">
           Catalog
         </Typography>
-        <Grid container spacing={2} sx={{}}>
-          {displayData.map((record, index) => (
-            <Grid item key={index} sx={{ ml: 15 }}>
-              <OrderCard
-                id={record.id}
-                img={img}
-                full_name={record.full_name}
-                destination={record.destination}
-                car_brand={record.car_brand}
-                price={record.price}
-              />
-            </Grid>
-          ))}
+        <Grid
+          container
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          {isDataLoading && <Loader />}
+          {isDataLoading && (
+            <span>No response from server, try again later!!!</span>
+          )}
         </Grid>
+
+        {displayData.length && (
+          <Grid container spacing={2} sx={{}}>
+            {displayData.map((record, index) => (
+              <Grid item key={index} sx={{ ml: 15 }}>
+                <OrderCard
+                  id={record.id}
+                  img={img}
+                  full_name={record.full_name}
+                  destination={record.destination}
+                  car_brand={record.car_brand}
+                  price={record.price}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </Box>
     </>
   );

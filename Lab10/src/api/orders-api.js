@@ -17,20 +17,20 @@ export const getAllOrders = async () => {
   }
 };
 
-export const getById = async (id) => {
-  try {
-    const response = await axios.get(`http://127.0.0.1:5000/get-bank/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-};
+// export const getById = async (id) => {
+//   try {
+//     const response = await axios.get(`http://127.0.0.1:5000/get-bank/${id}`);
+//     return response.data;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
-export const getByFilters = async (filters) => {
-  try {
-    const response = await axios.get(`http://127.0.0.1:5000/filter/${filters}`);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-};
+// export const getByFilters = async (filters) => {
+//   try {
+//     const response = await axios.get(`http://127.0.0.1:5000/filter/${filters}`);
+//     return response.data;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };

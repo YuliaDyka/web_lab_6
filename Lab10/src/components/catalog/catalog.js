@@ -59,9 +59,7 @@ function Catalog() {
           justifyContent="center"
         >
           {isDataLoading && <Loader />}
-          {isDataLoading && (
-            <span>No response from server, try again later!!!</span>
-          )}
+         
         </Grid>
 
         {displayData.length && (
